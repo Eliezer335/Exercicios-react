@@ -1,17 +1,23 @@
 import { useState } from 'react'
 
 function Contador() {
-  const [count, setCount] = useState(0)
-  const [tema, setTema] = useState(true)
-  const ternario = (tema === true) ? 'black' : 'lightgray'
+  const armazenamento = window.localStorage;
+
+  const contadorLocal = JSON.parse(armazenamento.getItem("Contador"));
+  const [count, setCount] = useState(contadorLocal || 0);
+  const [tema, setTema] = useState(true);
+  const ternario = (tema === true) ? 'black' : 'lightgray';
+
   const click = () => {
-    setTema(prevState => !prevState)
-  }
+    setTema(prevState => !prevState);
+  };
+
+  armazenamento.setItem("Contador", JSON.stringify(count));
 
   return (
     <>
       <div className='contador'>
-        {count}
+        {contadorLocal}
       </div>
 
       <div className="card" style={{backgroundColor: ternario}}>
