@@ -8,9 +8,9 @@ function Contador() {
   const [tema, setTema] = useState(true);
   const ternario = (tema === true) ? 'black' : 'lightgray';
 
-  const click = () => {
-    setTema(prevState => !prevState);
-  };
+  const click = () => setTema((prevState) => !prevState);
+  const counting = () => setCount((count) => count + 1);
+  const reseting = () => setCount(0)
 
   armazenamento.setItem("Contador", JSON.stringify(count));
 
@@ -22,10 +22,10 @@ function Contador() {
 
       <div className="card" style={{backgroundColor: ternario}}>
         
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={counting}>
           Somar 1
         </button>
-        <button onClick={() => setCount(0)}>
+        <button onClick={reseting}>
           Reset
         </button>
         <button onClick={click}>
